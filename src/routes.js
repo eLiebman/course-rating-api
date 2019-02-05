@@ -65,10 +65,7 @@ router.get('/courses', (req, res, next) => {
 // Get /api/course/:courseId 200
 // Returns all properties and related documents for provided Course ID
 // Use mongoose population to load the related user and reviews documents
-
-// I added authentication to this route in order to satisfy the exceeds expectations testing requirement.
-// This route now returns a 401 error if authentication fails.
-router.get('/courses/:courseId', mid.authenticateUser, (req, res, next) => {
+router.get('/courses/:courseId', (req, res, next) => {
     Course
         .findOne({ _id: req.params.courseId })
         .populate('reviews')

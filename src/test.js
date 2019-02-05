@@ -61,9 +61,9 @@ describe('When I make a request to the GET route with the correct credentials', 
     });
 });
 
-describe('When I make a request to the GET /api/courses/:courseId route with invalid credentials', function() {
+describe('When I make a request to the GET /api/users route with invalid credentials', function() {
     it('Returns a 401 status error', function(done) {
-        axios.get('http://localhost:5000/api/courses/57029ed4795118be119cc43d', {
+        axios.get('http://localhost:5000/api/users', {
             withCredentials: true,
             auth: {
                 username:"nobody@nothing.com",
