@@ -3,6 +3,8 @@
 // load modules
 const express = require('express');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const router = require('./routes');
 
 const app = express();
 
@@ -12,7 +14,27 @@ app.set('port', process.env.PORT || 5000);
 // morgan gives us http request logging
 app.use(morgan('dev'));
 
-// TODO add additional routes here
+// JSON parser
+app.use(express.json());
+
+// Connect to database
+mongoose.connect('mongodb://localhost:27017/course-api', { useNewUrlParser: true });
+
+// Create variable db
+const db = mongoose.connection;
+
+// Handle Errors
+db.on('error', err => {
+  console.error("db connection error:", err);
+});
+
+// All db communication goes here
+db.once('open', () => {
+  console.log('Database connection successful');
+});
+
+// Import routes
+app.use('/api', router);
 
 // send a friendly greeting for the root route
 app.get('/', (req, res) => {
