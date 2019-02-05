@@ -32,7 +32,7 @@ router.post('/users', (req, res, next) => {
                 if (err.type = 'MongooseValidationError') err.status = 400;
                 return next(err);
             } else {
-                return res.send(201);
+                return res.status(201).send();
             }
         });
     } else {
@@ -92,7 +92,7 @@ router.post('/courses', mid.authenticateUser, (req, res, next) => {
             return next(err);
         }
         res.location('/');
-        res.send(201);
+        res.status(201).send();
     });
 });
 
@@ -108,7 +108,7 @@ router.put('/courses/:courseId', mid.authenticateUser, (req, res, next) => {
             err.status = 404;
             return next(err);
         } else {
-            res.send(204);
+            res.status(204).send();
         }
     });
 });
@@ -146,7 +146,7 @@ router.post('/courses/:courseId/reviews', mid.authenticateUser, (req, res, next)
                         if(error) return next(error);
                         else {
                             res.location('/');
-                            res.send(201);
+                            res.status(201).send();
                         }
                     });
                 }

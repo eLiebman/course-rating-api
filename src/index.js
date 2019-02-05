@@ -18,7 +18,7 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 // Connect to database
-mongoose.connect('mongodb://localhost:27017/course-api', { useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/course-api', { useNewUrlParser: true, useCreateIndex: true });
 
 // Create variable db
 const db = mongoose.connection;
